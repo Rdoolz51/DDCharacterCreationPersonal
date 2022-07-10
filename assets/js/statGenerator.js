@@ -15,6 +15,7 @@ var CharacterAttributes = {
     spells: [],
     hitpoints: '',
     speed: '',
+    traits: [],
 };
 var PageAttributes = {
     characterPage: '',
@@ -40,12 +41,17 @@ var charisma = 0;
 var hitpoints = 0;
 var speed = 0;
 var proficiencies = [];
+var traits = [];
 var mulliganCounter = 0;
+var proficiencyChoices = [];
+let race = CharacterAttributes.race.toLowerCase();
+let playerClass = CharacterAttributes.class.toLowerCase();
 //creates a button and appends it to whatever div you fill in.
 buttonEl = `<a class="waves-effect waves-light red darken-4 btn" id="statBtn"><i class="material-icons left">keyboard_arrow_right</i>Generate Stats</a>`;
 $('#statContainer').append(buttonEl);
 $('#statBtn').on('click', function () {
     randomizeStats();
+    proficiencyOpt();
     //allows player to reroll stats 1 time
     if (mulliganCounter >= 2) {
         $('#statBtn').hide();
@@ -60,7 +66,39 @@ function d(num, numDice = 1) {
     }
     return roll;
 }
-
+function proficiencyOpt() {
+    fetch('https://www.dnd5eapi.co/api/classes/' + playerClass + '/')
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(function (data) {
+            proficiencyChoices = [];
+            for (let i = 0; i < data.proficiency_choices[0].choose; i++) {
+                let rProf = Math.floor(Math.random() * data.proficiency_choices[0].from.length);
+                proficiencyChoices = proficiencyChoices.concat(data.proficiency_choices[0].from[rProf].name);
+            }
+            if (
+                proficiencyChoices[proficiencyChoices.length - 1] ==
+                    proficiencyChoices[proficiencyChoices.length - 2] ||
+                proficiencyChoices[proficiencyChoices.length - 1] ==
+                    proficiencyChoices[proficiencyChoices.length - 3] ||
+                proficiencyChoices[proficiencyChoices.length - 1] ==
+                    proficiencyChoices[proficiencyChoices.length - 4] ||
+                proficiencyChoices[proficiencyChoices.length - 2] ==
+                    proficiencyChoices[proficiencyChoices.length - 3] ||
+                proficiencyChoices[proficiencyChoices.length - 2] ==
+                    proficiencyChoices[proficiencyChoices.length - 4] ||
+                proficiencyChoices[proficiencyChoices.length - 3] == proficiencyChoices[proficiencyChoices.length - 4]
+            ) {
+                proficiencyOpt();
+            }
+            return proficiencyChoices;
+        });
+}
+proficiencyOpt();
+// proficiencyOpt();
 function randomizeStats() {
     //clears each stat every time the button is clicked
     $('#str').empty();
@@ -98,9 +136,6 @@ function randomizeStats() {
         rolls[i] = rolls[j];
         rolls[j] = k;
     }
-
-    let race = CharacterAttributes.race.toLowerCase();
-    let playerClass = CharacterAttributes.class.toLowerCase();
 
     //used for testing
 
@@ -352,7 +387,7 @@ function randomizeStats() {
             speed = data.speed;
         });
 
-    //gets proficiencies for each race
+    //gets baseline proficiencies for each class
 
     fetch('https://www.dnd5eapi.co/api/classes/' + playerClass + '/proficiencies')
         .then(function (response) {
@@ -366,6 +401,26 @@ function randomizeStats() {
                 proficiencies.push(result.name);
             });
         });
+    //get optional proficiencies for each class
+    console.log(proficiencyChoices);
+    //get traits for each race
+    fetch('https://www.dnd5eapi.co/api/races/' + race + '/traits')
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(function (data) {
+            traits = [];
+            if (race == 'dragonborn') {
+                traits.push(data.results[0].name, data.results[11].name, data.results[12].name);
+            } else {
+                data.results.forEach((result) => {
+                    traits.push(result.name);
+                });
+            }
+        });
+
     //appends each stat to its own div on a page (Must create the divs first)
     $('#str').append('strength = ' + strength);
     $('#dex').append('dexterity =  ' + dexterity);
@@ -387,16 +442,12 @@ $('#submitChar').on('click', function () {
     CharacterAttributes.wisdom = wisdom;
     CharacterAttributes.hitpoints = hitpoints;
     CharacterAttributes.speed = speed;
-    CharacterAttributes.proficiencies = proficiencies;
+    CharacterAttributes.proficiencies = proficiencies = proficiencies.concat(proficiencyChoices);
+    CharacterAttributes.traits = traits;
     PageAttributes.statsPage = 'complete';
     localStorage.setItem('character', JSON.stringify(CharacterAttributes));
     localStorage.setItem('pageState', JSON.stringify(PageAttributes));
 });
-
-// return to home button(out of use until we get pdf working)
-// $('#returnBtn').on('click', function () {
-//     location.href = '/index.html';
-// });
 
 // gets modal ready for use
 $(document).ready(function () {

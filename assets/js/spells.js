@@ -15,6 +15,7 @@ var CharacterAttributes = {
     spells: [],
     hitpoints: '',
     speed: '',
+    traits: [],
 };
 var PageAttributes = {
     characterPage: '',
@@ -273,11 +274,6 @@ $('#submitChar2').on('click', function () {
     $('.hidden-on-start2').hide();
     save();
 });
-
-// return to index button(out of use until we get pdf working)
-// $('#returnHome').on('click', function () {
-//     location.href = './index.html';
-// });
 
 // sends user to tutorial video
 $('#tut').on('click', function () {

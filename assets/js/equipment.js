@@ -15,6 +15,7 @@ var CharacterAttributes = {
     spells: [],
     hitpoints: '',
     speed: '',
+    traits: [],
 };
 var PageAttributes = {
     characterPage: '',
