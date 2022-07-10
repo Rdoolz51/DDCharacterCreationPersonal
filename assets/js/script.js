@@ -15,6 +15,7 @@ var CharacterAttributes = {
     spells: [],
     hitpoints: '',
     speed: '',
+    traits: [],
 };
 var PageAttributes = {
     characterPage: '',
@@ -172,6 +173,7 @@ function displayStats() {
         var playerSpells = CharacterAttributes.spells;
         var playerHp = CharacterAttributes.hitpoints;
         var playerSpeed = CharacterAttributes.speed;
+        var playerTraits = CharacterAttributes.traits;
         var dispName = `<p class="stats"> Your character's Name is <span class="highlight">${playerName}</span></p>`;
         var dispClass = `<p class="stats"> Your character's Class is <span class="highlight"> ${playerClass}</span></p>`;
         var dispRace = `<p class="stats"> Your character's Race is <span class="highlight"> ${playerRace}</span></p>`;
@@ -193,6 +195,8 @@ function displayStats() {
             var playerSpls = playerSpells.join(' , ');
             var dispSpells = `<p class="stats"> Your character's Spells are <span class="highlight"> ${playerSpls}</span></p>`;
         }
+        var playerTrts = playerTraits.join(' , ');
+        var dispTraits = `<p class="stats"> Your character's Traits are :  <span class="highlight">${playerTrts}</span></p>`;
         var dispHp = `<p class="stats"> Your character's hitpoints are <span class="highlight"> ${playerHp}</span></p>`;
         var dispSpeed = `<p class="stats"> Your character's speed is <span class="highlight"> ${playerSpeed}</span></p>`;
         $('#character-stats').append(dispName);
@@ -209,6 +213,7 @@ function displayStats() {
         $('#character-stats').append(dispChar);
         $('#character-stats').append(dispEquip);
         $('#character-stats').append(dispSpells);
+        $('#character-stats').append(dispTraits);
         $('#character-stats').append(dispHp);
         $('#character-stats').append(dispSpeed);
     }

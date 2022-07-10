@@ -15,6 +15,7 @@ var CharacterAttributes = {
     spells: [],
     hitpoints: '',
     speed: '',
+    traits: [],
 };
 var PageAttributes = {
     characterPage: '',
@@ -51,6 +52,7 @@ var playerEquipment = CharacterAttributes.equipment;
 var playerSpells = CharacterAttributes.spells;
 var playerHp = CharacterAttributes.hitpoints;
 var playerSpeed = CharacterAttributes.speed;
+var playerTraits = CharacterAttributes.traits;
 // var playerSpells = JSON.stringify(pSpells);
 
 var apiKey = 'AIzaSyBZsuBMiz1R9DYR75Hr6VbSs74eJFb2FHk';
@@ -107,6 +109,8 @@ var displayStats = function () {
         var playerSpls = playerSpells.join(' , ');
         var dispSpells = `<p class="stats"> Your character's Spells are :  <span class="highlight"> ${playerSpls}</span></p>`;
     }
+    var playerTrts = playerTraits.join(' , ');
+    var dispTraits = `<p class="stats"> Your character's Traits are :  <span class="highlight">${playerTrts}</span></p>`;
     var dispHp = `<p class="stats"> Your character's hitpoints are :  <span class="highlight"> ${playerHp}</span></p>`;
     var dispSpeed = `<p class="stats"> Your character's speed is :  <span class="highlight"> ${playerSpeed}</span></p>`;
     $('#character-stats').append(dispName);
@@ -123,9 +127,10 @@ var displayStats = function () {
     $('#character-stats').append(dispChar);
     $('#character-stats').append(dispEquip);
     $('#character-stats').append(dispSpells);
+    $('#character-stats').append(dispTraits);
     $('#character-stats').append(dispHp);
     $('#character-stats').append(dispSpeed);
 };
 
-ClassVideo();
+// ClassVideo();
 displayStats();
