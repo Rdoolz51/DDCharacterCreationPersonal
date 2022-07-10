@@ -31,7 +31,7 @@ if (!checkIfAttStored) {
 
 load();
 displayStats();
-function load() {
+function load () {
     var pState = localStorage.getItem('pageState');
     PageAttributes = JSON.parse(pState);
 }
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 $('#burger').on('click', hamburgerMenu);
 //transforms hamburger menu the hard way :)
-function hamburgerMenu() {
+function hamburgerMenu () {
     if ($('.c-pan').hasClass('zero')) {
         $('.c-pan').css('transform', 'translateX(-1000px)');
         $('.c-pan').removeClass('zero');
@@ -61,12 +61,12 @@ function hamburgerMenu() {
     }
 }
 //each of the following functions hides its respective card on the index.html page until the previous page(s) has been marked completed
-function charCreate() {
+function charCreate () {
     if (PageAttributes.characterPage === 'complete') {
         $('#ccCard').css('background-image', 'url(./assets/images/player2done.jpg)');
         $('#ccCard').css('background-size', 'cover');
-        $('#ccCard').css('color', 'green');
-        $('#ccCard').css('border', '10px solid green');
+        $('#ccCard').css('color', 'red');
+        $('#ccCard').css('border', '10px solid red');
         $('#ccCard').on('click', function () {
             $('#ccCardAnchor').attr('href', '#');
         });
@@ -81,12 +81,12 @@ function charCreate() {
         PageAttributes.characterPage = '';
     }
 }
-function statCreate() {
+function statCreate () {
     if (PageAttributes.statsPage == 'complete') {
         $('#statCard').css('background-image', 'url(./assets/images/stats2done.jpg)');
         $('#statCard').css('background-size', 'cover');
-        $('#statCard').css('color', 'green');
-        $('#statCard').css('border', '10px solid green');
+        $('#statCard').css('color', 'red');
+        $('#statCard').css('border', '10px solid red');
         $('#statCard').on('click', function () {
             $('#statCardAnchor').attr('href', '#');
         });
@@ -101,13 +101,13 @@ function statCreate() {
         }
     }
 }
-function equipCreate() {
+function equipCreate () {
     if (PageAttributes.equipPage == 'complete') {
         $('#equipCard').css('background-image', 'url(./assets/images/equip2done.jpg)');
         $('#equipCard').css('background-size', 'cover');
         $('#equipCard').css('background-position', '0px -45px');
-        $('#equipCard').css('color', 'green');
-        $('#equipCard').css('border', '10px solid green');
+        $('#equipCard').css('color', 'red');
+        $('#equipCard').css('border', '10px solid red');
         $('#equipCard').on('click', function () {
             $('#equipCardAnchor').attr('href', '#');
         });
@@ -120,13 +120,13 @@ function equipCreate() {
         }
     }
 }
-function spellCreate() {
+function spellCreate () {
     if (PageAttributes.spellPage == 'complete') {
         $('#spellCard').css('background-image', 'url(./assets/images/spells2done.jpg)');
         $('#spellCard').css('background-size', 'cover');
         $('#spellCard').css('background-position', 'left');
-        $('#spellCard').css('color', 'green');
-        $('#spellCard').css('border', '10px solid green');
+        $('#spellCard').css('color', 'red');
+        $('#spellCard').css('border', '10px solid red');
         $('#spellCard').on('click', function () {
             $('#spellCardAnchor').attr('href', '#');
         });
@@ -151,10 +151,10 @@ $('#resetCharacter').on('click', function () {
 });
 
 // either displays stats or new player message
-function displayStats() {
+function displayStats () {
     CharacterAttributes = JSON.parse(localStorage.getItem('character', PageAttributes));
     if (PageAttributes.spellPage != 'complete') {
-        var NewUser = `<h5>You have not created a character yet! To begin your journey please click the character picture!</h5>`;
+        var NewUser = `<h5 class="white-text">You have not created a character yet! To begin your journey please click the character picture!</h5>`;
         $('#character-stats').append(NewUser);
     } else {
         var playerName = CharacterAttributes.name;
