@@ -50,6 +50,7 @@ let playerClass = CharacterAttributes.class.toLowerCase();
 buttonEl = `<a class="waves-effect waves-light red darken-4 btn" id="statBtn"><i class="material-icons left">keyboard_arrow_right</i>Generate Stats</a>`;
 $('#statContainer').append(buttonEl);
 $('#statBtn').on('click', function () {
+    $('#statBtn').text('Reroll (Only Usable Once)');
     randomizeStats();
     proficiencyOpt();
     //allows player to reroll stats 1 time
