@@ -155,6 +155,7 @@ $('#submit-spells').on('click', function () {
         var checkedSpell = $(this).data('spell');
         console.log(checkedSpell);
         selectedSpells.push(checkedSpell);
+        CharacterAttributes.spells = selectedSpells;
     });
     if (selectedSpells.length == cantripsKnown) {
         // console.log('lower than cantrips');
@@ -222,18 +223,18 @@ var randomSpell = function () {
     RandomSpellsDisplay();
 };
 
-function dupPrevention () {
-    var used = selectedSpells.find(selRanSpells);
-    if (used) {
-        selectedSpells = [];
-    } else {
-        selectedSpells.push(selRanSpells);
-    }
-}
+// function dupPrevention () {
+//     var used = selectedSpells.find(selRanSpells);
+//     if (used) {
+//         selectedSpells = [];
+//     } else {
+//         selectedSpells.push(selRanSpells);
+//     }
+// }
 
 // Shuffles the array to get random spell names
 
-var shuffle = function (array) {
+function shuffle (array) {
     let currentIndex = array.length,
         randomIndex;
 
@@ -263,8 +264,6 @@ var RandomSpellsDisplay = function () {
 $('#submitChar').on('click', function () {
     $('.endContainer').show();
     $('#tut2').show();
-    // var endMessage = `<h3>Your chosen spells have been submitted to your character sheet!</h3>`;
-    $('#closingMessage').prepend(endMessage);
     $('.hidden-on-start').hide();
     $('.hidden-on-start1').hide();
     $('.hidden-on-start2').hide();
@@ -273,8 +272,6 @@ $('#submitChar').on('click', function () {
 });
 $('#submitChar2').on('click', function () {
     $('.endContainer').show();
-    // var endMessage = `<h3>Your chosen spells have been submitted to your character sheet!</h3>`;
-    $('#closingMessage').prepend(endMessage);
     $('.hidden-on-start').hide();
     $('.hidden-on-start1').hide();
     $('.hidden-on-start2').hide();
