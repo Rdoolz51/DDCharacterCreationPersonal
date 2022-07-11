@@ -134,14 +134,14 @@ var renderSpellDescription = function (data, index) {
 
 // Fetches amount of cantrips the class chosen has available
 var cantripRestriction = function () {
-    var cantripUrl = 'classes/druid/levels';
+    var cantripUrl = 'classes/' + charClass + '/levels';
     cantripApiUrl = baseApiUrl + cantripUrl;
     fetch(cantripApiUrl)
         .then(function (response2) {
             return response2.json();
         })
         .then(function (result2) {
-            cantripsKnown = result2[1].spellcasting.cantrips_known;
+            cantripsKnown = result2[0].spellcasting.cantrips_known;
         })
         .catch(function (err) {
             console.log(err);
@@ -156,8 +156,8 @@ $('#submit-spells').on('click', function () {
         console.log(checkedSpell);
         selectedSpells.push(checkedSpell);
     });
-    if (selectedSpells.length <= cantripsKnown) {
-        console.log('lower than cantrips');
+    if (selectedSpells.length == cantripsKnown) {
+        // console.log('lower than cantrips');
         $('#submit-spells').hide();
         $('#pre-choices').hide();
         var finalChoiceHead = `<h3>You have selected these spells: </h3>`;
@@ -167,10 +167,16 @@ $('#submit-spells').on('click', function () {
             $('#spells-chosen').append(selSpellDisp);
         }
         $('.hidden-on-start').show();
-    } else {
+    } else if (selectedSpells.length > cantripsKnown) {
         console.log('higher than cantrips');
         $('#submit-warning').text(
             'You have submitted more cantrips than your class can have! Please change your selection.'
+        );
+        selectedSpells = [];
+    } else {
+        console.log('too few cantrips selected');
+        $('#submit-warning').text(
+            'You have chosen too few Cantrips. Please select the correct amount!'
         );
         selectedSpells = [];
     }
