@@ -31,7 +31,7 @@ if (!checkIfAttStored) {
 
 load();
 displayStats();
-function load() {
+function load () {
     var pState = localStorage.getItem('pageState');
     PageAttributes = JSON.parse(pState);
 }
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
 $('#burger').on('click', hamburgerMenu);
 //transforms hamburger menu the hard way :)
-function hamburgerMenu() {
+function hamburgerMenu () {
     if ($('.c-pan').hasClass('zero')) {
         $('.c-pan').css('transform', 'translateX(-1000px)');
         $('.c-pan').removeClass('zero');
@@ -61,12 +61,12 @@ function hamburgerMenu() {
     }
 }
 //each of the following functions hides its respective card on the index.html page until the previous page(s) has been marked completed
-function charCreate() {
+function charCreate () {
     if (PageAttributes.characterPage === 'complete') {
-        $('#ccCard').css('background-image', 'url(./assets/images/player2done.jpg)');
+        $('#ccCard').css('background-image', 'url(./assets/images/player2bggrey.jpg)');
         $('#ccCard').css('background-size', 'cover');
-        $('#ccCard').css('color', 'green');
-        $('#ccCard').css('border', '10px solid green');
+        $('#ccCard').css('color', 'gray');
+        $('#ccCard').css('border', '10px solid #3a3c40');
         $('#ccCard').on('click', function () {
             $('#ccCardAnchor').attr('href', '#');
         });
@@ -81,13 +81,14 @@ function charCreate() {
         PageAttributes.characterPage = '';
     }
 }
-function statCreate() {
+function statCreate () {
     if (PageAttributes.statsPage == 'complete') {
-        $('#statCard').css('background-image', 'url(./assets/images/stats2done.jpg)');
+        $('#statCard').css('background-image', 'url(./assets/images/stats2bggrey.jpg)');
         $('#statCard').css('background-size', 'cover');
-        $('#statCard').css('color', 'green');
-        $('#statCard').css('border', '10px solid green');
+        $('#statCard').css('color', 'gray');
+        $('#statCard').css('border', '10px solid #3a3c40');
         $('#statCard').on('click', function () {
+
             $('#statCardAnchor').attr('href', '#');
         });
     } else {
@@ -101,13 +102,13 @@ function statCreate() {
         }
     }
 }
-function equipCreate() {
+function equipCreate () {
     if (PageAttributes.equipPage == 'complete') {
-        $('#equipCard').css('background-image', 'url(./assets/images/equip2done.jpg)');
+        $('#equipCard').css('background-image', 'url(./assets/images/equip2bggrey.jpg)');
         $('#equipCard').css('background-size', 'cover');
         $('#equipCard').css('background-position', '0px -45px');
-        $('#equipCard').css('color', 'green');
-        $('#equipCard').css('border', '10px solid green');
+        $('#equipCard').css('color', 'gray');
+        $('#equipCard').css('border', '10px solid #3a3c40');
         $('#equipCard').on('click', function () {
             $('#equipCardAnchor').attr('href', '#');
         });
@@ -120,13 +121,13 @@ function equipCreate() {
         }
     }
 }
-function spellCreate() {
+function spellCreate () {
     if (PageAttributes.spellPage == 'complete') {
-        $('#spellCard').css('background-image', 'url(./assets/images/spells2done.jpg)');
+        $('#spellCard').css('background-image', 'url(./assets/images/spells2bggrey.jpg)');
         $('#spellCard').css('background-size', 'cover');
         $('#spellCard').css('background-position', 'left');
-        $('#spellCard').css('color', 'green');
-        $('#spellCard').css('border', '10px solid green');
+        $('#spellCard').css('color', 'gray');
+        $('#spellCard').css('border', '10px solid #3a3c40');
         $('#spellCard').on('click', function () {
             $('#spellCardAnchor').attr('href', '#');
         });
@@ -151,12 +152,14 @@ $('#resetCharacter').on('click', function () {
 });
 
 // either displays stats or new player message
-function displayStats() {
+function displayStats () {
     CharacterAttributes = JSON.parse(localStorage.getItem('character', PageAttributes));
     if (PageAttributes.spellPage != 'complete') {
-        var NewUser = `<h5>You have not created a character yet! To begin your journey please click the character picture!</h5>`;
+        var NewUser = `<h5 class="white-text">You have not created a character yet! To begin your journey please click the character picture!</h5>`;
         $('#character-stats').append(NewUser);
     } else {
+        var finishedUser = `<h5 class="center highlight white-text">Character Sheet</h5>`;
+        $('#character-stats').append(finishedUser);
         var playerName = CharacterAttributes.name;
         var playerClass = CharacterAttributes.class;
         var playerRace = CharacterAttributes.race;
@@ -174,31 +177,31 @@ function displayStats() {
         var playerHp = CharacterAttributes.hitpoints;
         var playerSpeed = CharacterAttributes.speed;
         var playerTraits = CharacterAttributes.traits;
-        var dispName = `<p class="stats"> Your character's Name is <span class="highlight">${playerName}</span></p>`;
-        var dispClass = `<p class="stats"> Your character's Class is <span class="highlight"> ${playerClass}</span></p>`;
-        var dispRace = `<p class="stats"> Your character's Race is <span class="highlight"> ${playerRace}</span></p>`;
-        var dispAlign = `<p class="stats"> Your character's alignment is <span class="highlight"> ${playerAlignment}</span></p>`;
-        var dispSex = `<p class="stats"> Your character's sex is <span class="highlight"> ${playerSex}</span></p>`;
+        var dispName = `<p class="stats varPrintText"> Your character's Name is :  <span class="varPrinter">${playerName}</span></p>`;
+        var dispClass = `<p class="stats varPrintText"> Your character's Class is :  <span class="varPrinter"> ${playerClass}</span></p>`;
+        var dispRace = `<p class="stats varPrintText"> Your character's Race is :  <span class="varPrinter"> ${playerRace}</span></p>`;
+        var dispAlign = `<p class="stats varPrintText"> Your character's alignment is :  <span class="varPrinter"> ${playerAlignment}</span></p>`;
+        var dispSex = `<p class="stats varPrintText"> Your character's sex is :  <span class="varPrinter"> ${playerSex}</span></p>`;
         var playerProf = playerProficiencies.join(' , ');
-        var dispProf = `<p class="stats"> Your character's proficiencies are <span class="highlight"> ${playerProf}</span></p>`;
-        var dispStr = `<p class="stats"> Your character's Strength is <span class="highlight"> ${playerStrength}</span></p>`;
-        var dispDex = `<p class="stats"> Your character's Dexterity is <span class="highlight"> ${playerDexterity}</span></p>`;
-        var dispCon = `<p class="stats"> Your character's Constitution is <span class="highlight"> ${playerConstitution}</span></p>`;
-        var dispInt = `<p class="stats"> Your character's Intelligence is <span class="highlight"> ${playerIntelligence}</span></p>`;
-        var dispWis = `<p class="stats"> Your character's Wisdom is <span class="highlight"> ${playerWisdom}</span></p>`;
-        var dispChar = `<p class="stats"> Your character's Charisma is <span class="highlight"> ${playerCharisma}</span></p>`;
+        var dispProf = `<p class="stats varPrintText"> Your character's proficiencies are :  <span class="varPrinter"> ${playerProf}</span></p>`;
+        var dispStr = `<p class="stats varPrintText"> Your character's Strength is :  <span class="varPrinter"> ${playerStrength}</span></p>`;
+        var dispDex = `<p class="stats varPrintText"> Your character's Dexterity is :  <span class="varPrinter"> ${playerDexterity}</span></p>`;
+        var dispCon = `<p class="stats varPrintText"> Your character's Constitution is : <span class="varPrinter"> ${playerConstitution}</span></p>`;
+        var dispInt = `<p class="stats varPrintText"> Your character's Intelligence is :  <span class="varPrinter"> ${playerIntelligence}</span></p>`;
+        var dispWis = `<p class="stats varPrintText"> Your character's Wisdom is :  <span class="varPrinter"> ${playerWisdom}</span></p>`;
+        var dispChar = `<p class="stats varPrintText"> Your character's Charisma is :  <span class="varPrinter"> ${playerCharisma}</span></p>`;
         var playerEquip = playerEquipment.join(' , ');
-        var dispEquip = `<p class="stats"> Your character's Equipment is <span class="highlight"> ${playerEquip}</span></p>`;
+        var dispEquip = `<p class="stats varPrintText"> Your character's Equipment is :  <span class="varPrinter"> ${playerEquip}</span></p>`;
         if (playerSpells.length === 0) {
-            var dispSpells = `<p class="stats"> Your character doesn't know any spells</p>`;
+            var dispSpells = `<p class="stats varPrintText"> Your character doesn't know any spells</p>`;
         } else {
             var playerSpls = playerSpells.join(' , ');
-            var dispSpells = `<p class="stats"> Your character's Spells are <span class="highlight"> ${playerSpls}</span></p>`;
+            var dispSpells = `<p class="stats varPrintText"> Your character's Spells are :  <span class="varPrinter"> ${playerSpls}</span></p>`;
         }
         var playerTrts = playerTraits.join(' , ');
-        var dispTraits = `<p class="stats"> Your character's Traits are :  <span class="highlight">${playerTrts}</span></p>`;
-        var dispHp = `<p class="stats"> Your character's hitpoints are <span class="highlight"> ${playerHp}</span></p>`;
-        var dispSpeed = `<p class="stats"> Your character's speed is <span class="highlight"> ${playerSpeed}</span></p>`;
+        var dispTraits = `<p class="stats varPrintText"> Your character's Traits are :  <span class="varPrinter">${playerTrts}</span></p>`;
+        var dispHp = `<p class="stats varPrintText"> Your character's hitpoints are :  <span class="varPrinter"> ${playerHp}</span></p>`;
+        var dispSpeed = `<p class="stats varPrintText"> Your character's speed is :  <span class="varPrinter"> ${playerSpeed}</span></p>`;
         $('#character-stats').append(dispName);
         $('#character-stats').append(dispClass);
         $('#character-stats').append(dispRace);

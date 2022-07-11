@@ -59,14 +59,14 @@ $('#statBtn').on('click', function () {
 });
 
 //dice roller. takes in how many sides on the side, then how many dice youd like to roll.
-function d(num, numDice = 1) {
+function d (num, numDice = 1) {
     var roll = 0;
     for (i = 0; i < numDice; i++) {
         roll += Math.max(Math.floor(Math.random() * num + 1), 1);
     }
     return roll;
 }
-function proficiencyOpt() {
+function proficiencyOpt () {
     fetch('https://www.dnd5eapi.co/api/classes/' + playerClass + '/')
         .then(function (response) {
             if (response.ok) {
@@ -81,15 +81,15 @@ function proficiencyOpt() {
             }
             if (
                 proficiencyChoices[proficiencyChoices.length - 1] ==
-                    proficiencyChoices[proficiencyChoices.length - 2] ||
+                proficiencyChoices[proficiencyChoices.length - 2] ||
                 proficiencyChoices[proficiencyChoices.length - 1] ==
-                    proficiencyChoices[proficiencyChoices.length - 3] ||
+                proficiencyChoices[proficiencyChoices.length - 3] ||
                 proficiencyChoices[proficiencyChoices.length - 1] ==
-                    proficiencyChoices[proficiencyChoices.length - 4] ||
+                proficiencyChoices[proficiencyChoices.length - 4] ||
                 proficiencyChoices[proficiencyChoices.length - 2] ==
-                    proficiencyChoices[proficiencyChoices.length - 3] ||
+                proficiencyChoices[proficiencyChoices.length - 3] ||
                 proficiencyChoices[proficiencyChoices.length - 2] ==
-                    proficiencyChoices[proficiencyChoices.length - 4] ||
+                proficiencyChoices[proficiencyChoices.length - 4] ||
                 proficiencyChoices[proficiencyChoices.length - 3] == proficiencyChoices[proficiencyChoices.length - 4]
             ) {
                 proficiencyOpt();
@@ -99,7 +99,7 @@ function proficiencyOpt() {
 }
 proficiencyOpt();
 // proficiencyOpt();
-function randomizeStats() {
+function randomizeStats () {
     //clears each stat every time the button is clicked
     $('#str').empty();
     $('#dex').empty();
@@ -234,11 +234,11 @@ function randomizeStats() {
     }
     if (playerClass == 'sorcerer') {
         //Char + Con
-        strength = priorityRolls[1]; //highest roll
+        charisma = priorityRolls[1]; //highest roll
         constitution = priorityRolls[0]; //2nd highest roll
         wisdom = rolls[0];
         intelligence = rolls[1];
-        charisma = rolls[2];
+        strength = rolls[2];
         dexterity = rolls[3];
     }
     if (playerClass == 'warlock') {
