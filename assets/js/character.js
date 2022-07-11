@@ -25,7 +25,7 @@ var PageAttributes = {
 };
 localStorage.setItem('character', JSON.stringify(CharacterAttributes));
 loadPage();
-function loadPage() {
+function loadPage () {
     var pState = localStorage.getItem('pageState');
     PageAttributes = JSON.parse(pState);
 }
@@ -534,7 +534,17 @@ var saveInput = function (event) {
     } else {
         CharacterAttributes.alignment = $('#alignMenu').val();
     }
-    $('#saveChar').removeClass('hide');
+    if ($('#name-checked').is(':checked') || $('#nameUsed').val != "") {
+        if ($('#class-choice').is(':checked') || $('#classMenu').val() != 'default') {
+            if ($('#race-choice').is(':checked') || $('#raceMenu').val() != 'default') {
+                if ($('#align-choice').is(':checked') || $('#alignMenu').val() != 'default') {
+                    $('#saveChar').removeClass('hide');
+                }
+            }
+        }
+    }
+
+
 };
 $('#lockIn').on('click', saveInput);
 

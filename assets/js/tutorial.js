@@ -103,7 +103,7 @@ var displayStats = function () {
     var dispChar = `<p class="stats varPrintText"> Your character's Charisma is :  <span class="varPrinter"> ${playerCharisma}</span></p>`;
     var playerEquip = playerEquipment.join(' , ');
     var dispEquip = `<p class="stats varPrintText"> Your character's Equipment is :  <span class="varPrinter"> ${playerEquip}</span></p>`;
-    if (playerSpells.length === 0) {
+    if (playerSpells.length == 0) {
         var dispSpells = `<p class="stats varPrintText"> Your character doesn't know any spells</p>`;
     } else {
         var playerSpls = playerSpells.join(' , ');
@@ -132,5 +132,5 @@ var displayStats = function () {
     $('#character-stats').append(dispSpeed);
 };
 
-ClassVideo();
+// ClassVideo();
 displayStats();

@@ -216,7 +216,7 @@ var randomSpell = function () {
     RandomSpellsDisplay();
 };
 
-function dupPrevention() {
+function dupPrevention () {
     var used = selectedSpells.find(selRanSpells);
     if (used) {
         selectedSpells = [];

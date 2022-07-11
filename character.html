@@ -38,7 +38,7 @@
             <nav>
                 <div class="nav-wrapper grey darken-4">
                     <div class="col s12">
-                        <a href="#!" class="breadcrumb">Character Creation</a>
+                        <a href="#!" class="breadcrumb green-text">Character Creation</a>
                     </div>
                 </div>
             </nav>
@@ -82,7 +82,7 @@
                     </p>
                     <p>
                         <label>
-                            <input type="radio" name="gender-select" class="red darken-4s" id="other" />
+                            <input checked type="radio" name="gender-select" class="red darken-4s" id="other" />
                             <span class="white-text">Other</span>
                         </label>
                     </p>
@@ -90,7 +90,7 @@
                 <!-- switches to select randomized or not -->
                 <div class="col s12 l3">
                     <h5>Choice or Random?</h5>
-                    <div class="switch">
+                    <div class="switch nameSwitch">
                         <p>Name</p>
                         <label class="white-text">
                             My Choice
@@ -99,7 +99,7 @@
                             Random
                         </label>
                     </div>
-                    <div class="switch">
+                    <div class="switch classSwitch">
                         <p>Class</p>
                         <label class="white-text">
                             My Choice
@@ -108,7 +108,7 @@
                             Random
                         </label>
                     </div>
-                    <div class="switch">
+                    <div class="switch raceSwitch">
                         <p>Race</p>
                         <label class="white-text">
                             My Choice
@@ -117,7 +117,7 @@
                             Random
                         </label>
                     </div>
-                    <div class="switch">
+                    <div class="switch alignSwitch">
                         <p>Alignment</p>
                         <label class="white-text">
                             My Choice
@@ -134,7 +134,7 @@
                     <p>If you know what you'd like, enter your choices here:</p>
                     <div class="input-field col s12" id="nameUsedDisp">
                         <h6>Name</h6>
-                        <input placeholder="Type name" id="nameUsed" type="text" class="validate" />
+                        <input placeholder="Placeholder Name" id="nameUsed" type="text" class="validate white-text"> </input>
                     </div>
                     <div class="col s12 hide" id="nameRandDisp">
                         <h6>Name</h6>
@@ -145,6 +145,7 @@
                     <div class="input-field col s12" id="classMenuDisp">
                         <h6>Class</h6>
                         <select id="classMenu">
+                            <option value="default">Pick A Class</option>
                             <option value="barbarian">Barbarian</option>
                             <option value="bard">Bard</option>
                             <option value="cleric">Cleric</option>
@@ -189,6 +190,7 @@
                     <div class="input-field col s12" id="alignMenuDisp">
                         <h6>Alignment</h6>
                         <select id="alignMenu" class="text-dark">
+                            <option value="default" selected>Select Your Alignment</option>
                             <option value="chaotic-neutral">chaotic-neutral</option>
                             <option value="chaotic-evil">chaotic-evil</option>
                             <option value="chaotic-good">chaotic-good</option>
