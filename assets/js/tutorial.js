@@ -132,5 +132,5 @@ var displayStats = function () {
     $('#character-stats').append(dispSpeed);
 };
 
-// ClassVideo();
+ ClassVideo();
 displayStats();
