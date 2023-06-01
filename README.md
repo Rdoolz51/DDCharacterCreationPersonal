@@ -62,7 +62,7 @@ We used a multitude of technologies, including:
 
 Brought To You By _The Dashing Ducks_:
 
--   Ryan Dooley
--   Ryan Buckley
--   Meg Martinez
--   Mohammad Shahid
+-   Ryan Dooley - Stats, Equipment, design of all pages, refactoring all pages.
+-   Ryan Buckley - Spells, assisted with design, created names array
+-   Meg Martinez - Created part of names page
+-   Mohammad Shahid - ReadME
